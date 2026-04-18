@@ -382,22 +382,12 @@
 (with_clause
   (_) @module)
 
-; Override selected_component defaults inside import clauses
-(with_clause
-  (selected_component
-    prefix: (identifier) @module))
+; Override selected_component defaults inside import clauses (at any depth)
+((identifier) @module
+  (#has-ancestor? @module with_clause))
 
-(with_clause
-  (selected_component
-    selector_name: (identifier) @module))
-
-(use_clause
-  (selected_component
-    prefix: (identifier) @module))
-
-(use_clause
-  (selected_component
-    selector_name: (identifier) @module))
+((identifier) @module
+  (#has-ancestor? @module use_clause))
 
 ; ---------------------------------------------------------------------------
 ; Context-dependent keyword overrides
